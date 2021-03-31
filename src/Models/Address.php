@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Addresses\Models;
+namespace NunoMazer\Addressable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,15 +11,12 @@ use Jackpopp\GeoDistance\GeoDistanceTrait;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * Rinvex\Addresses\Models\Address.
+ * NunoMazer\Addressable\Models\Address.
  *
  * @property int                                                $id
  * @property int                                                $addressable_id
  * @property string                                             $addressable_type
  * @property string                                             $label
- * @property string                                             $given_name
- * @property string                                             $family_name
- * @property string                                             $full_name
  * @property string                                             $organization
  * @property string                                             $country_code
  * @property string                                             $street
@@ -35,32 +32,30 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property \Carbon\Carbon|null                                $updated_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $addressable
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address inCountry($countryCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address inLanguage($languageCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address isBilling()
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address isPrimary()
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address isShipping()
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address outside($distance, $measurement = null, $latitude = null, $longitude = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereAddressableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereAddressableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereCountryCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereFamilyName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereGivenName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereIsBilling($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereIsPrimary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereIsShipping($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereLabel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereOrganization($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address wherePostalCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereStreet($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Addresses\Models\Address within($distance, $measurement = null, $latitude = null, $longitude = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address inCountry($countryCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address inLanguage($languageCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address isBilling()
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address isPrimary()
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address isShipping()
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address outside($distance, $measurement = null, $latitude = null, $longitude = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereAddressableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereAddressableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereIsBilling($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereIsPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereIsShipping($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereOrganization($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address within($distance, $measurement = null, $latitude = null, $longitude = null)
  * @mixin \Eloquent
  */
 class Address extends Model
@@ -75,8 +70,6 @@ class Address extends Model
         'addressable_id',
         'addressable_type',
         'label',
-        'given_name',
-        'family_name',
         'organization',
         'country_code',
         'street',
@@ -97,8 +90,6 @@ class Address extends Model
         'addressable_id' => 'integer',
         'addressable_type' => 'string',
         'label' => 'string',
-        'given_name' => 'string',
-        'family_name' => 'string',
         'organization' => 'string',
         'country_code' => 'string',
         'street' => 'string',
@@ -130,8 +121,6 @@ class Address extends Model
         'addressable_id' => 'required|integer',
         'addressable_type' => 'required|string|strip_tags|max:150',
         'label' => 'nullable|string|strip_tags|max:150',
-        'given_name' => 'required|string|strip_tags|max:150',
-        'family_name' => 'nullable|string|strip_tags|max:150',
         'organization' => 'nullable|string|strip_tags|max:150',
         'country_code' => 'nullable|alpha|size:2|country',
         'street' => 'nullable|string|strip_tags|max:150',
@@ -162,7 +151,7 @@ class Address extends Model
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('rinvex.addresses.tables.addresses'));
+        $this->setTable(config('addressable.tables.addresses'));
     }
 
     /**
@@ -238,16 +227,6 @@ class Address extends Model
     }
 
     /**
-     * Get full name attribute.
-     *
-     * @return string
-     */
-    public function getFullNameAttribute(): string
-    {
-        return implode(' ', [$this->given_name, $this->family_name]);
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected static function boot()
@@ -255,7 +234,7 @@ class Address extends Model
         parent::boot();
 
         static::saving(function (self $address) {
-            if (config('rinvex.addresses.geocoding')) {
+            if (config('addressable.addresses.geocoding')) {
                 $segments[] = $address->street;
                 $segments[] = sprintf('%s, %s %s', $address->city, $address->state, $address->postal_code);
                 $segments[] = country($address->country_code)->getName();

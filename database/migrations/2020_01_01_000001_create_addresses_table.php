@@ -10,12 +10,10 @@ class CreateAddressesTable extends Migration
 {
     public function up()
     {
-        Schema::create(config('rinvex.addresses.tables.addresses'), function (Blueprint $table) {
+        Schema::create(config('addressable.tables.addresses'), function (Blueprint $table) {
             // Columns
             $table->increments('id');
             $table->morphs('addressable');
-            $table->string('given_name');
-            $table->string('family_name');
             $table->string('label')->nullable();
             $table->string('organization')->nullable();
             $table->string('country_code', 2)->nullable();
@@ -35,6 +33,6 @@ class CreateAddressesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists(config('rinvex.addresses.tables.addresses'));
+        Schema::dropIfExists(config('addressable.tables.addresses'));
     }
 }

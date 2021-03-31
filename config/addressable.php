@@ -14,7 +14,7 @@ return [
 
     // Addresses Models
     'models' => [
-        'address' => \Rinvex\Addresses\Models\Address::class,
+        'address' => \NunoMazer\Addressable\Models\Address::class,
     ],
 
     // Addresses Geocoding Options

@@ -1,13 +1,12 @@
 {
-    "name": "rinvex/laravel-addresses",
-    "description": "Rinvex Addresses is a polymorphic Laravel package, for addressbook management. You can add addresses to any eloquent model with ease.",
+    "name": "nunomazer/laravel-addressable",
+    "description": "Laravel Addressable is a polymorphic Laravel package, for addressbook management. You can add addresses to any eloquent model with ease.",
     "type": "library",
     "keywords": [
         "city",
         "state",
         "model",
         "postal",
-        "rinvex",
         "street",
         "address",
         "laravel",
@@ -22,12 +21,12 @@
         "polymorphic"
     ],
     "license": "MIT",
-    "homepage": "https://rinvex.com",
+    "homepage": "https://mazer.dev",
     "support": {
-        "email": "help@rinvex.com",
-        "issues": "https://github.com/rinvex/laravel-addresses/issues",
-        "source": "https://github.com/rinvex/laravel-addresses",
-        "docs": "https://github.com/rinvex/laravel-addresses/blob/master/README.md"
+        "email": "ademir.mazer.jr@gmail.com",
+        "issues": "https://github.com/nunomazer/laravel-addressable/issues",
+        "source": "https://github.com/nunomazer/laravel-addressable",
+        "docs": "https://github.com/nunomazer/laravel-addressable/blob/master/README.md"
     },
     "authors": [
         {
@@ -39,11 +38,17 @@
             "name": "Abdelrahman Omran",
             "homepage": "https://omranic.com",
             "email": "me@omranic.com",
+            "role": "Author of the based package"
+        },
+        {
+            "name": "Ademir Mazer Junior",
+            "homepage": "https://mazer.dev",
+            "email": "ademir.mazer.jr@gmail",
             "role": "Project Lead"
         },
         {
             "name": "The Generous Laravel Community",
-            "homepage": "https://github.com/rinvex/laravel-addresses/contributors"
+            "homepage": "https://github.com/nunomazer/laravel-addressable/contributors"
         }
     ],
     "require": {
@@ -62,12 +67,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rinvex\\Addresses\\": "src/"
+            "NunoMazer\\Addressable\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rinvex\\Addresses\\Tests\\": "tests"
+            "NunoMazer\\Addressable\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -81,7 +86,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rinvex\\Addresses\\Providers\\AddressesServiceProvider"
+                "NunoMazer\\Addressable\\Providers\\AddressableServiceProvider"
             ]
         }
     },
