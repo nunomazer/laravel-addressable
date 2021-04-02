@@ -28,7 +28,13 @@
         "source": "https://github.com/nunomazer/laravel-addressable",
         "docs": "https://github.com/nunomazer/laravel-addressable/blob/master/README.md"
     },
-    "authors": [
+    "authors": [        
+        {
+            "name": "Ademir Mazer Junior",
+            "homepage": "https://mazer.dev",
+            "email": "ademir.mazer.jr@gmail.com",
+            "role": "Project Lead"
+        },
         {
             "name": "Rinvex LLC",
             "homepage": "https://rinvex.com",
@@ -39,12 +45,6 @@
             "homepage": "https://omranic.com",
             "email": "me@omranic.com",
             "role": "Author of the based package"
-        },
-        {
-            "name": "Ademir Mazer Junior",
-            "homepage": "https://mazer.dev",
-            "email": "ademir.mazer.jr@gmail.com",
-            "role": "Project Lead"
         },
         {
             "name": "The Generous Laravel Community",
