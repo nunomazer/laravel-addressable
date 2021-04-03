@@ -25,7 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('number')->nullable();
             $table->string('complement')->nullable();
             $table->string('postal_code')->nullable();
-            $table->jsonb('meta')->nullable(); 
+            $table->jsonb('extra')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->boolean('is_primary')->default(false);
