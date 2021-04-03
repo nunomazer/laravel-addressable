@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NunoMazer\AddresseableTraits;
+namespace NunoMazer\Addresseable\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
