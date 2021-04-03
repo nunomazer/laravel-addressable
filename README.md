@@ -14,15 +14,23 @@ _This is based on **Rinvex Addresses** package_
 
 2. Publish resources (migrations and config files):
     ```shell
-    php artisan publish
+    php artisan vendor:publish
     ```
+    
+3. Edit config file `config/addressable.php` if you need to change database table name:
+   ```php
+    // Addresses Database Tables
+    'tables' => [
+        'addresses' => 'addresses',
+    ],
+   ```
 
-3. Execute migrations via the following command:
+4. Execute migrations via the following command:
     ```shell
     php artisan migrate
     ```
 
-4. Done!
+5. Done!
 
 
 ## Usage
