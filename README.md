@@ -37,6 +37,20 @@ _This is based on **Rinvex Addresses** package_
 
 To add addresses support to your eloquent models simply use `\NunoMazer\Addressable\Traits\Addressable` trait.
 
+```php
+<?php
+
+namespace App\Models;
+
+...
+
+use NunoMazer\Addressable\Traits\Addressable;
+
+class User extends Model
+{
+    use Addressable;
+```
+
 ### Manage your addresses
 
 ```php
@@ -44,14 +58,20 @@ To add addresses support to your eloquent models simply use `\NunoMazer\Addressa
 $user = new \App\Models\User::find(1);
 
 // Create a new address
+// note that this are fake informations
 $user->addresses()->create([
     'label' => 'Default Address',
     'organization' => 'DN42',
     'country_code' => 'br',
-    'street' => 'Carlos Cavalcanti',
     'state' => 'Paraná',
     'city' => 'Ponta Grossa',
+    'line_1' => 'Av. Carlos Cavalcanti',
+    'number' => '200',
+    'complement' => 'Apt #44',
     'postal_code' => '84000-100',
+    'extra' => [
+            'ibge_code' => '300'    
+        ],
     'latitude' => '31.2467601',
     'longitude' => '29.9020376',
     'is_primary' => true,
