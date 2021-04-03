@@ -19,10 +19,15 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string                                             $label
  * @property string                                             $organization
  * @property string                                             $country_code
- * @property string                                             $street
  * @property string                                             $state
  * @property string                                             $city
+ * @property string                                             $district
+ * @property string                                             $line_1
+ * @property string                                             $line_2
+ * @property string                                             $number
+ * @property string                                             $complement
  * @property string                                             $postal_code
+ * @property array                                              $extra
  * @property float                                              $latitude
  * @property float                                              $longitude
  * @property bool                                               $is_primary
@@ -41,8 +46,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereAddressableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereAddressableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereComplement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCountryCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereExtra($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereIsBilling($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereIsPrimary($value)
@@ -50,10 +57,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLabel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLine1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereLine2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereOrganization($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address wherePostalCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereStreet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\NunoMazer\Addressable\Models\Address within($distance, $measurement = null, $latitude = null, $longitude = null)
  * @mixin \Eloquent
@@ -72,10 +81,15 @@ class Address extends Model
         'label',
         'organization',
         'country_code',
-        'street',
         'state',
         'city',
+        'district',
+        'line_1',
+        'line_2',
+        'number',
+        'complement',
         'postal_code',
+        'extra',
         'latitude',
         'longitude',
         'is_primary',
@@ -92,10 +106,14 @@ class Address extends Model
         'label' => 'string',
         'organization' => 'string',
         'country_code' => 'string',
-        'street' => 'string',
         'state' => 'string',
         'city' => 'string',
+        'line_1' => 'string',
+        'line_2' => 'string',
+        'number' => 'string',
+        'complement' => 'string',
         'postal_code' => 'string',
+        'extra' => 'array',
         'latitude' => 'float',
         'longitude' => 'float',
         'is_primary' => 'boolean',
@@ -123,9 +141,13 @@ class Address extends Model
         'label' => 'nullable|string|strip_tags|max:150',
         'organization' => 'nullable|string|strip_tags|max:150',
         'country_code' => 'nullable|alpha|size:2|country',
-        'street' => 'nullable|string|strip_tags|max:150',
         'state' => 'nullable|string|strip_tags|max:150',
         'city' => 'nullable|string|strip_tags|max:150',
+        'district' => 'nullable|string|strip_tags|max:150',
+        'line_1' => 'nullable|string|strip_tags|max:255',
+        'line_2' => 'nullable|string|strip_tags|max:255',
+        'number' => 'nullable|string|strip_tags|max:150',
+        'complement' => 'nullable|string|strip_tags|max:150',
         'postal_code' => 'nullable|string|strip_tags|max:150',
         'latitude' => 'nullable|numeric',
         'longitude' => 'nullable|numeric',
@@ -235,7 +257,7 @@ class Address extends Model
 
         static::saving(function (self $address) {
             if (config('addressable.addresses.geocoding')) {
-                $segments[] = $address->street;
+                $segments[] = $address->line_1 . ' - ' . $address->number;
                 $segments[] = sprintf('%s, %s %s', $address->city, $address->state, $address->postal_code);
                 $segments[] = country($address->country_code)->getName();
 
