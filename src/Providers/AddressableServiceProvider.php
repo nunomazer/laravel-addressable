@@ -29,8 +29,10 @@ class AddressableServiceProvider extends ServiceProvider
     public function boot()
     {
         // Publish Resources
-        $this->publishesConfig('nunomazer/laravel-addressable');
-        $this->publishesMigrations('nunomazer/laravel-addressable');
-        ! $this->autoloadMigrations('nunomazer/laravel-addressable') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->publishes([
+            __DIR__.'/../../config/addressable.php' => config_path('addressable.php')
+        ], 'config');
+
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
